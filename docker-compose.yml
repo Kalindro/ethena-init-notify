@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    image: ghcr.io/kalindro/ethena-init-notify:latest
+    restart: unless-stopped
+    env_file:
+      - stack.env  # For Portainer's sake
+    volumes:
+      - /etc/localtime:/etc/localtime:ro

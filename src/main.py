@@ -50,11 +50,13 @@ class EthenaInitNotify:
         print(f"Current cap: {current_cap}")
         print(f"Max cap: {max_cap}")
 
+        driver.quit()
+
         if max_cap >= current_cap * 1.01:
             print("CAP INCREASED")
             self.send_notification()
         else:
-            print("Still no cap increase RIP")
+            print("Still no cap increase, RIP\n")
 
     def driver_init(self) -> selenium.webdriver:
         print("Initializing chrome driver...")
@@ -106,7 +108,7 @@ class EthenaInitNotify:
 if __name__ == '__main__':
     notification_service = EthenaInitNotify()
     notification_service.main()
-    schedule.every(5).minutes.do(notification_service.main)
+    schedule.every(3).minutes.do(notification_service.main)
 
     while True:
         schedule.run_pending()
