@@ -1,1 +1,1 @@
-Code to notify about cap increase of eUSD on Init
+Quick mock to notify about cap increase on Init capital, eUSD.
