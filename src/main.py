@@ -1,8 +1,8 @@
 import os
 import re
 import time
+from random import randint
 
-import schedule
 import selenium
 from dotenv import load_dotenv
 from fake_useragent import UserAgent
@@ -106,10 +106,7 @@ class EthenaInitNotify:
 
 
 if __name__ == '__main__':
-    notification_service = EthenaInitNotify()
-    notification_service.main()
-    schedule.every(3).minutes.do(notification_service.main)
 
     while True:
-        schedule.run_pending()
-        time.sleep(1)
+        EthenaInitNotify().main()
+        time.sleep(randint(180, 240) / 10)
