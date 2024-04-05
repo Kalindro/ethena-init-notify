@@ -52,7 +52,7 @@ class EthenaInitNotify:
 
         driver.quit()
 
-        if max_cap >= current_cap * 1.01:
+        if max_cap - current_cap > 4_000:
             print("CAP INCREASED")
             self.send_notification()
         else:
