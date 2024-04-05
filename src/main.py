@@ -6,6 +6,7 @@ from random import randint
 import selenium
 from dotenv import load_dotenv
 from fake_useragent import UserAgent
+from kalindro_custom_loguru_logger import default_logger as logger
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
@@ -17,6 +18,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from src.pushbullet_client import PushbulletClient
 
 load_dotenv()
+
+logger.set_console_level("INFO")
 
 
 class EthenaInitNotify:
@@ -47,19 +50,19 @@ class EthenaInitNotify:
         current_cap = int(round(float(re.sub(r'[^\d.]', '', first_element_text))))
         max_cap = int(round(float(re.sub(r'[^\d.]', '', second_element_text))))
 
-        print(f"Current cap: {current_cap}")
-        print(f"Max cap: {max_cap}")
+        logger.info(f"Current cap: {current_cap}")
+        logger.info(f"Max cap: {max_cap}")
 
         driver.quit()
 
         if max_cap - current_cap > 4_000:
-            print("CAP INCREASED")
+            logger.success("CAP INCREASED")
             self.send_notification()
         else:
-            print("Still no cap increase, RIP\n")
+            logger.info("Still no cap increase, RIP\n")
 
     def driver_init(self) -> selenium.webdriver:
-        print("Initializing chrome driver...")
+        logger.debug("Initializing chrome driver...")
         user_agent = UserAgent().chrome
 
         options = webdriver.ChromeOptions()
@@ -85,7 +88,7 @@ class EthenaInitNotify:
             }
         )
 
-        print("Assertion - successfully found chrome driver")
+        logger.debug("Assertion - successfully found chrome driver")
         stealth(
             driver,
             languages=["en-US", "en"],
@@ -95,7 +98,7 @@ class EthenaInitNotify:
             renderer="Intel Iris OpenGL Engine",
             fix_hairline=True
         )
-        print("Finished initializing driver")
+        logger.debug("Finished initializing driver")
         return driver
 
     @staticmethod
