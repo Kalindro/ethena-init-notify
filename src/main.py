@@ -59,7 +59,7 @@ class EthenaInitNotify:
             logger.success("CAP INCREASED")
             self.send_notification()
         else:
-            logger.info("Still no cap increase, RIP\n")
+            logger.info("Still no cap increase, RIP")
 
     def driver_init(self) -> selenium.webdriver:
         logger.debug("Initializing chrome driver...")
