@@ -109,7 +109,7 @@ class EthenaInitNotify:
 
 
 if __name__ == '__main__':
-    interval = randint(40, 50)
+    interval = randint(20, 30)
     while True:
         EthenaInitNotify().main()
         time.sleep(interval)
